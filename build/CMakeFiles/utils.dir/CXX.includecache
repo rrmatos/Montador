@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/trabalho1/utils.h
+iostream
+-
+
+/home/devrhino/Desktop/TheEnd/sb/trabalho1/src/utils.cpp
+trabalho1/utils.h
+-
+

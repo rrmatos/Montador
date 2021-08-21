@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/trabalho1/Exemple.hpp
+iostream
+-
+vector
+-
+array
+-
+
+/home/devrhino/Desktop/TheEnd/sb/trabalho1/src/Exemple.cpp
+trabalho1/Exemple.hpp
+-
+

@@ -1,0 +1,9 @@
+/home/devrhino/Desktop/TheEnd/sb/trabalho1/build/CMakeFiles/install/strip.dir
+/home/devrhino/Desktop/TheEnd/sb/trabalho1/build/CMakeFiles/install/local.dir
+/home/devrhino/Desktop/TheEnd/sb/trabalho1/build/CMakeFiles/install.dir
+/home/devrhino/Desktop/TheEnd/sb/trabalho1/build/CMakeFiles/utils.dir
+/home/devrhino/Desktop/TheEnd/sb/trabalho1/build/CMakeFiles/Montador.dir
+/home/devrhino/Desktop/TheEnd/sb/trabalho1/build/CMakeFiles/trabalho1.dir
+/home/devrhino/Desktop/TheEnd/sb/trabalho1/build/CMakeFiles/edit_cache.dir
+/home/devrhino/Desktop/TheEnd/sb/trabalho1/build/CMakeFiles/rebuild_cache.dir
+/home/devrhino/Desktop/TheEnd/sb/trabalho1/build/CMakeFiles/list_install_components.dir
