@@ -45,7 +45,7 @@ namespace trabalho1{
 
             void initialize();            
             std::string file_name_;
-            std::vector<std::string> vector_code_lone_;
+            std::vector<std::string> vector_code_line_, vector_code_line_stf_;
                     
     };
 

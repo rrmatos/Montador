@@ -36,7 +36,7 @@ namespace trabalho1{
 
             code_line = to_capital_letter(code_line);
 
-            vector_code_lone_.push_back(code_line);
+            vector_code_line_.push_back(code_line);
         }
         
         //  std::cout << opcodes_["ADD"][1] << std::endl;
@@ -49,6 +49,37 @@ namespace trabalho1{
         boost::to_upper(code_line);
         return code_line;
     }
+
+
+    void section_text_first()
+    {
+        int i = 0;
+        
+        for (auto code_line: vector_code_line_){
+
+            if (*code_line == "SECTION TEXT"){
+                break;
+            }else{
+                i++;
+            }
+        }
+
+
+        for ( i; vector_code_line_.size(); i++){
+
+             vector_code_line_stf_.push_back(vector_code_line_[i]);
+        }
+
+       for ( int j = 0 ; j; i++){
+
+             vector_code_line_stf_.push_back(vector_code_line_[i]);
+        }
+
+
+
+    }
+
+
 
     
 
