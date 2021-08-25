@@ -6,5 +6,5 @@ CXX_FLAGS = -fPIC   -std=gnu++1z
 
 CXX_DEFINES = -DMontador_EXPORTS
 
-CXX_INCLUDES = -I/home/devrhino/Desktop/TheEnd/sb/trabalho1/include 
+CXX_INCLUDES = -I/home/rafael/trabalho1/include 
 

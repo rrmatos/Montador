@@ -44,5 +44,5 @@ set(CMAKE_MAKEFILE_PRODUCTS
 set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/utils.dir/DependInfo.cmake"
   "CMakeFiles/Montador.dir/DependInfo.cmake"
-  "CMakeFiles/trabalho1.dir/DependInfo.cmake"
+  "CMakeFiles/montador.dir/DependInfo.cmake"
   )

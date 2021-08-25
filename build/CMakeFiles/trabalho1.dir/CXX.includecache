@@ -24,17 +24,17 @@ unordered_map
 iostream
 -
 
-/home/devrhino/Desktop/TheEnd/sb/trabalho1/src/Montador.cpp
+/home/rafael/trabalho1/src/Montador.cpp
 trabalho1/Montador.hpp
 -
 trabalho1/utils.h
 -
 
-/home/devrhino/Desktop/TheEnd/sb/trabalho1/src/main.cpp
+/home/rafael/trabalho1/src/main.cpp
 trabalho1/Montador.hpp
 -
 
-/home/devrhino/Desktop/TheEnd/sb/trabalho1/src/utils.cpp
+/home/rafael/trabalho1/src/utils.cpp
 trabalho1/utils.h
 -
 

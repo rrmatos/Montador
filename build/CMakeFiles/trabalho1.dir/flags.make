@@ -6,5 +6,5 @@ CXX_FLAGS =   -std=gnu++1z
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/devrhino/Desktop/TheEnd/sb/trabalho1/include 
+CXX_INCLUDES = -I/home/rafael/trabalho1/include 
 

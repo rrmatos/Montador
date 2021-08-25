@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/devrhino/Desktop/TheEnd/sb/trabalho1
+CMAKE_SOURCE_DIR = /home/rafael/trabalho1
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/devrhino/Desktop/TheEnd/sb/trabalho1/build
+CMAKE_BINARY_DIR = /home/rafael/trabalho1/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -126,9 +126,9 @@ list_install_components/fast: list_install_components
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/devrhino/Desktop/TheEnd/sb/trabalho1/build/CMakeFiles /home/devrhino/Desktop/TheEnd/sb/trabalho1/build/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/rafael/trabalho1/build/CMakeFiles /home/rafael/trabalho1/build/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/devrhino/Desktop/TheEnd/sb/trabalho1/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/rafael/trabalho1/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -183,17 +183,17 @@ Montador/fast:
 .PHONY : Montador/fast
 
 #=============================================================================
-# Target rules for targets named trabalho1
+# Target rules for targets named montador
 
 # Build rule for target.
-trabalho1: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 trabalho1
-.PHONY : trabalho1
+montador: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 montador
+.PHONY : montador
 
 # fast build rule for target.
-trabalho1/fast:
-	$(MAKE) -f CMakeFiles/trabalho1.dir/build.make CMakeFiles/trabalho1.dir/build
-.PHONY : trabalho1/fast
+montador/fast:
+	$(MAKE) -f CMakeFiles/montador.dir/build.make CMakeFiles/montador.dir/build
+.PHONY : montador/fast
 
 src/Montador.o: src/Montador.cpp.o
 
@@ -202,7 +202,7 @@ src/Montador.o: src/Montador.cpp.o
 # target to build an object file
 src/Montador.cpp.o:
 	$(MAKE) -f CMakeFiles/Montador.dir/build.make CMakeFiles/Montador.dir/src/Montador.cpp.o
-	$(MAKE) -f CMakeFiles/trabalho1.dir/build.make CMakeFiles/trabalho1.dir/src/Montador.cpp.o
+	$(MAKE) -f CMakeFiles/montador.dir/build.make CMakeFiles/montador.dir/src/Montador.cpp.o
 .PHONY : src/Montador.cpp.o
 
 src/Montador.i: src/Montador.cpp.i
@@ -212,7 +212,7 @@ src/Montador.i: src/Montador.cpp.i
 # target to preprocess a source file
 src/Montador.cpp.i:
 	$(MAKE) -f CMakeFiles/Montador.dir/build.make CMakeFiles/Montador.dir/src/Montador.cpp.i
-	$(MAKE) -f CMakeFiles/trabalho1.dir/build.make CMakeFiles/trabalho1.dir/src/Montador.cpp.i
+	$(MAKE) -f CMakeFiles/montador.dir/build.make CMakeFiles/montador.dir/src/Montador.cpp.i
 .PHONY : src/Montador.cpp.i
 
 src/Montador.s: src/Montador.cpp.s
@@ -222,7 +222,7 @@ src/Montador.s: src/Montador.cpp.s
 # target to generate assembly for a file
 src/Montador.cpp.s:
 	$(MAKE) -f CMakeFiles/Montador.dir/build.make CMakeFiles/Montador.dir/src/Montador.cpp.s
-	$(MAKE) -f CMakeFiles/trabalho1.dir/build.make CMakeFiles/trabalho1.dir/src/Montador.cpp.s
+	$(MAKE) -f CMakeFiles/montador.dir/build.make CMakeFiles/montador.dir/src/Montador.cpp.s
 .PHONY : src/Montador.cpp.s
 
 src/main.o: src/main.cpp.o
@@ -231,7 +231,7 @@ src/main.o: src/main.cpp.o
 
 # target to build an object file
 src/main.cpp.o:
-	$(MAKE) -f CMakeFiles/trabalho1.dir/build.make CMakeFiles/trabalho1.dir/src/main.cpp.o
+	$(MAKE) -f CMakeFiles/montador.dir/build.make CMakeFiles/montador.dir/src/main.cpp.o
 .PHONY : src/main.cpp.o
 
 src/main.i: src/main.cpp.i
@@ -240,7 +240,7 @@ src/main.i: src/main.cpp.i
 
 # target to preprocess a source file
 src/main.cpp.i:
-	$(MAKE) -f CMakeFiles/trabalho1.dir/build.make CMakeFiles/trabalho1.dir/src/main.cpp.i
+	$(MAKE) -f CMakeFiles/montador.dir/build.make CMakeFiles/montador.dir/src/main.cpp.i
 .PHONY : src/main.cpp.i
 
 src/main.s: src/main.cpp.s
@@ -249,7 +249,7 @@ src/main.s: src/main.cpp.s
 
 # target to generate assembly for a file
 src/main.cpp.s:
-	$(MAKE) -f CMakeFiles/trabalho1.dir/build.make CMakeFiles/trabalho1.dir/src/main.cpp.s
+	$(MAKE) -f CMakeFiles/montador.dir/build.make CMakeFiles/montador.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
 src/utils.o: src/utils.cpp.o
@@ -259,7 +259,7 @@ src/utils.o: src/utils.cpp.o
 # target to build an object file
 src/utils.cpp.o:
 	$(MAKE) -f CMakeFiles/utils.dir/build.make CMakeFiles/utils.dir/src/utils.cpp.o
-	$(MAKE) -f CMakeFiles/trabalho1.dir/build.make CMakeFiles/trabalho1.dir/src/utils.cpp.o
+	$(MAKE) -f CMakeFiles/montador.dir/build.make CMakeFiles/montador.dir/src/utils.cpp.o
 .PHONY : src/utils.cpp.o
 
 src/utils.i: src/utils.cpp.i
@@ -269,7 +269,7 @@ src/utils.i: src/utils.cpp.i
 # target to preprocess a source file
 src/utils.cpp.i:
 	$(MAKE) -f CMakeFiles/utils.dir/build.make CMakeFiles/utils.dir/src/utils.cpp.i
-	$(MAKE) -f CMakeFiles/trabalho1.dir/build.make CMakeFiles/trabalho1.dir/src/utils.cpp.i
+	$(MAKE) -f CMakeFiles/montador.dir/build.make CMakeFiles/montador.dir/src/utils.cpp.i
 .PHONY : src/utils.cpp.i
 
 src/utils.s: src/utils.cpp.s
@@ -279,7 +279,7 @@ src/utils.s: src/utils.cpp.s
 # target to generate assembly for a file
 src/utils.cpp.s:
 	$(MAKE) -f CMakeFiles/utils.dir/build.make CMakeFiles/utils.dir/src/utils.cpp.s
-	$(MAKE) -f CMakeFiles/trabalho1.dir/build.make CMakeFiles/trabalho1.dir/src/utils.cpp.s
+	$(MAKE) -f CMakeFiles/montador.dir/build.make CMakeFiles/montador.dir/src/utils.cpp.s
 .PHONY : src/utils.cpp.s
 
 # Help Target
@@ -293,9 +293,9 @@ help:
 	@echo "... install"
 	@echo "... utils"
 	@echo "... Montador"
-	@echo "... trabalho1"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... montador"
 	@echo "... list_install_components"
 	@echo "... src/Montador.o"
 	@echo "... src/Montador.i"
