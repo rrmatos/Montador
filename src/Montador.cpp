@@ -51,31 +51,38 @@ namespace trabalho1{
     }
 
 
-    void section_text_first()
+    void Montador::section_text_first()
     {
         int i = 0;
+        int section_text_idx = 0;
         
         for (auto code_line: vector_code_line_){
 
-            if (*code_line == "SECTION TEXT"){
+            if (code_line == "SECTION TEXT"){
                 break;
             }else{
                 i++;
             }
         }
 
+        section_text_idx = i;
 
-        for ( i; vector_code_line_.size(); i++){
+        for ( i; i < vector_code_line_.size(); i++){
 
-             vector_code_line_stf_.push_back(vector_code_line_[i]);
+            vector_code_line_stf_.push_back(vector_code_line_[i]);
         }
 
-       for ( int j = 0 ; j; i++){
+        
+       for ( int j = 0 ; j < section_text_idx ; j++){
 
-             vector_code_line_stf_.push_back(vector_code_line_[i]);
+            vector_code_line_stf_.push_back(vector_code_line_[j]);
         }
 
-
+        for (auto code_line: vector_code_line_stf_){
+            
+            std::cout << code_line << std::endl;
+            
+        }
 
     }
 

@@ -21,5 +21,5 @@ install(FILES src/Montador.hpp DESTINATION include)
 install(TARGETS utils DESTINATION lib)
 install(FILES src/utils.h DESTINATION include)
 
-add_executable(${PROJECT_NAME} src/main.cpp src/Montador.cpp  src/utils.cpp)
+add_executable(montador src/main.cpp src/Montador.cpp  src/utils.cpp)
 

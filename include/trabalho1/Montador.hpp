@@ -20,6 +20,7 @@ namespace trabalho1{
             void show_arg_name(std::string arg);
             void read_code_file(std::string file_name);
             std::string to_capital_letter(std::string code_line);
+            void section_text_first();
 
         private:
             std::vector<std::string> op_word_len;

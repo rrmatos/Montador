@@ -1,5 +1,6 @@
 steps:
-    unzip trabalho1.zip
+    #install:
+    sudo apt-get install libboost-dev
     #Go to  rabalho1 folder
     cd trabalho1
     # Create build directory in trabalho1 folder and enter in the build directory
