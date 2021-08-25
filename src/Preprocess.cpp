@@ -1,14 +1,14 @@
-#include <trabalho1/Montador.hpp>
+#include <trabalho1/Preprocess.hpp>
 #include <trabalho1/utils.h>
 
 namespace trabalho1{
 
-    Montador::Montador()
+    Preprocess::Preprocess()
     {
         initialize();
     }
 
-    void Montador::initialize()
+    void Preprocess::initialize()
     {
         std::cout << colouredString("init Montador Class", GREEN, BOLD) << std::endl;
 
@@ -19,14 +19,14 @@ namespace trabalho1{
         }
     }
 
-    void Montador::show_arg_name(std::string arg)
+    void Preprocess::show_arg_name(std::string arg)
     {
         file_name_ = arg;
         std::cout <<  file_name_ << std::endl;
 
     }
 
-    void Montador::read_code_file(std::string arg)
+    void Preprocess::read_code_file(std::string arg)
     {   
         std::string code_line; 
 
@@ -44,14 +44,14 @@ namespace trabalho1{
         ReadFile.close();
     }
 
-    std::string Montador::to_capital_letter(std::string code_line)
+    std::string Preprocess::to_capital_letter(std::string code_line)
     {
         boost::to_upper(code_line);
         return code_line;
     }
 
 
-    void Montador::section_text_first()
+    void Preprocess::section_text_first()
     {
         int i = 0;
         int section_text_idx = 0;
@@ -85,9 +85,5 @@ namespace trabalho1{
         }
 
     }
-
-
-
-    
 
 }   

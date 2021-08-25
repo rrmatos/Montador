@@ -1,1 +1,0 @@
-/usr/bin/c++ -fPIC   -shared -Wl,-soname,libMontador.so -o libMontador.so CMakeFiles/Montador.dir/src/Montador.cpp.o 

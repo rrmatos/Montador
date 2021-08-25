@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/rafael/trabalho1
+CMAKE_SOURCE_DIR = /home/devrhino/trabalho1
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/rafael/trabalho1/build
+CMAKE_BINARY_DIR = /home/devrhino/trabalho1/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -92,17 +92,6 @@ install/fast: preinstall/fast
 	/usr/bin/cmake -P cmake_install.cmake
 .PHONY : install/fast
 
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
-.PHONY : edit_cache
-
-# Special rule for the target edit_cache
-edit_cache/fast: edit_cache
-
-.PHONY : edit_cache/fast
-
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
@@ -113,6 +102,17 @@ rebuild_cache:
 rebuild_cache/fast: rebuild_cache
 
 .PHONY : rebuild_cache/fast
+
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+.PHONY : edit_cache
+
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
+
+.PHONY : edit_cache/fast
 
 # Special rule for the target list_install_components
 list_install_components:
@@ -126,9 +126,9 @@ list_install_components/fast: list_install_components
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/rafael/trabalho1/build/CMakeFiles /home/rafael/trabalho1/build/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/devrhino/trabalho1/build/CMakeFiles /home/devrhino/trabalho1/build/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/rafael/trabalho1/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/devrhino/trabalho1/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -170,17 +170,17 @@ utils/fast:
 .PHONY : utils/fast
 
 #=============================================================================
-# Target rules for targets named Montador
+# Target rules for targets named Preprocess
 
 # Build rule for target.
-Montador: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 Montador
-.PHONY : Montador
+Preprocess: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Preprocess
+.PHONY : Preprocess
 
 # fast build rule for target.
-Montador/fast:
-	$(MAKE) -f CMakeFiles/Montador.dir/build.make CMakeFiles/Montador.dir/build
-.PHONY : Montador/fast
+Preprocess/fast:
+	$(MAKE) -f CMakeFiles/Preprocess.dir/build.make CMakeFiles/Preprocess.dir/build
+.PHONY : Preprocess/fast
 
 #=============================================================================
 # Target rules for targets named montador
@@ -195,62 +195,62 @@ montador/fast:
 	$(MAKE) -f CMakeFiles/montador.dir/build.make CMakeFiles/montador.dir/build
 .PHONY : montador/fast
 
-src/Montador.o: src/Montador.cpp.o
+src/Preprocess.o: src/Preprocess.cpp.o
 
-.PHONY : src/Montador.o
-
-# target to build an object file
-src/Montador.cpp.o:
-	$(MAKE) -f CMakeFiles/Montador.dir/build.make CMakeFiles/Montador.dir/src/Montador.cpp.o
-	$(MAKE) -f CMakeFiles/montador.dir/build.make CMakeFiles/montador.dir/src/Montador.cpp.o
-.PHONY : src/Montador.cpp.o
-
-src/Montador.i: src/Montador.cpp.i
-
-.PHONY : src/Montador.i
-
-# target to preprocess a source file
-src/Montador.cpp.i:
-	$(MAKE) -f CMakeFiles/Montador.dir/build.make CMakeFiles/Montador.dir/src/Montador.cpp.i
-	$(MAKE) -f CMakeFiles/montador.dir/build.make CMakeFiles/montador.dir/src/Montador.cpp.i
-.PHONY : src/Montador.cpp.i
-
-src/Montador.s: src/Montador.cpp.s
-
-.PHONY : src/Montador.s
-
-# target to generate assembly for a file
-src/Montador.cpp.s:
-	$(MAKE) -f CMakeFiles/Montador.dir/build.make CMakeFiles/Montador.dir/src/Montador.cpp.s
-	$(MAKE) -f CMakeFiles/montador.dir/build.make CMakeFiles/montador.dir/src/Montador.cpp.s
-.PHONY : src/Montador.cpp.s
-
-src/main.o: src/main.cpp.o
-
-.PHONY : src/main.o
+.PHONY : src/Preprocess.o
 
 # target to build an object file
-src/main.cpp.o:
-	$(MAKE) -f CMakeFiles/montador.dir/build.make CMakeFiles/montador.dir/src/main.cpp.o
-.PHONY : src/main.cpp.o
+src/Preprocess.cpp.o:
+	$(MAKE) -f CMakeFiles/Preprocess.dir/build.make CMakeFiles/Preprocess.dir/src/Preprocess.cpp.o
+	$(MAKE) -f CMakeFiles/montador.dir/build.make CMakeFiles/montador.dir/src/Preprocess.cpp.o
+.PHONY : src/Preprocess.cpp.o
 
-src/main.i: src/main.cpp.i
+src/Preprocess.i: src/Preprocess.cpp.i
 
-.PHONY : src/main.i
+.PHONY : src/Preprocess.i
 
 # target to preprocess a source file
-src/main.cpp.i:
-	$(MAKE) -f CMakeFiles/montador.dir/build.make CMakeFiles/montador.dir/src/main.cpp.i
-.PHONY : src/main.cpp.i
+src/Preprocess.cpp.i:
+	$(MAKE) -f CMakeFiles/Preprocess.dir/build.make CMakeFiles/Preprocess.dir/src/Preprocess.cpp.i
+	$(MAKE) -f CMakeFiles/montador.dir/build.make CMakeFiles/montador.dir/src/Preprocess.cpp.i
+.PHONY : src/Preprocess.cpp.i
 
-src/main.s: src/main.cpp.s
+src/Preprocess.s: src/Preprocess.cpp.s
 
-.PHONY : src/main.s
+.PHONY : src/Preprocess.s
 
 # target to generate assembly for a file
-src/main.cpp.s:
-	$(MAKE) -f CMakeFiles/montador.dir/build.make CMakeFiles/montador.dir/src/main.cpp.s
-.PHONY : src/main.cpp.s
+src/Preprocess.cpp.s:
+	$(MAKE) -f CMakeFiles/Preprocess.dir/build.make CMakeFiles/Preprocess.dir/src/Preprocess.cpp.s
+	$(MAKE) -f CMakeFiles/montador.dir/build.make CMakeFiles/montador.dir/src/Preprocess.cpp.s
+.PHONY : src/Preprocess.cpp.s
+
+src/montador.o: src/montador.cpp.o
+
+.PHONY : src/montador.o
+
+# target to build an object file
+src/montador.cpp.o:
+	$(MAKE) -f CMakeFiles/montador.dir/build.make CMakeFiles/montador.dir/src/montador.cpp.o
+.PHONY : src/montador.cpp.o
+
+src/montador.i: src/montador.cpp.i
+
+.PHONY : src/montador.i
+
+# target to preprocess a source file
+src/montador.cpp.i:
+	$(MAKE) -f CMakeFiles/montador.dir/build.make CMakeFiles/montador.dir/src/montador.cpp.i
+.PHONY : src/montador.cpp.i
+
+src/montador.s: src/montador.cpp.s
+
+.PHONY : src/montador.s
+
+# target to generate assembly for a file
+src/montador.cpp.s:
+	$(MAKE) -f CMakeFiles/montador.dir/build.make CMakeFiles/montador.dir/src/montador.cpp.s
+.PHONY : src/montador.cpp.s
 
 src/utils.o: src/utils.cpp.o
 
@@ -292,17 +292,17 @@ help:
 	@echo "... install/local"
 	@echo "... install"
 	@echo "... utils"
-	@echo "... Montador"
-	@echo "... edit_cache"
+	@echo "... Preprocess"
 	@echo "... rebuild_cache"
+	@echo "... edit_cache"
 	@echo "... montador"
 	@echo "... list_install_components"
-	@echo "... src/Montador.o"
-	@echo "... src/Montador.i"
-	@echo "... src/Montador.s"
-	@echo "... src/main.o"
-	@echo "... src/main.i"
-	@echo "... src/main.s"
+	@echo "... src/Preprocess.o"
+	@echo "... src/Preprocess.i"
+	@echo "... src/Preprocess.s"
+	@echo "... src/montador.o"
+	@echo "... src/montador.i"
+	@echo "... src/montador.s"
 	@echo "... src/utils.o"
 	@echo "... src/utils.i"
 	@echo "... src/utils.s"

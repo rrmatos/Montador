@@ -1,5 +1,5 @@
-#ifndef MONTADOR_H
-#define MONTADOR_H
+#ifndef PREPROCESS_H
+#define PREPROCESS_H
 
 #include <iostream>
 #include <vector>
@@ -12,15 +12,15 @@ namespace trabalho1{
 
     using Param = std::unordered_map<std::string, std::vector<std::string>>;
 
-    class Montador{
+    class Preprocess{
         public:
-            Montador();
-            ~Montador() {};
+            Preprocess();
+            ~Preprocess() {};
 
             void show_arg_name(std::string arg);
             void read_code_file(std::string file_name);
-            std::string to_capital_letter(std::string code_line);
             void section_text_first();
+            std::string to_capital_letter(std::string code_line);
 
         private:
             std::vector<std::string> op_word_len;
