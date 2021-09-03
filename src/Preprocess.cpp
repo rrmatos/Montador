@@ -10,7 +10,7 @@ namespace trabalho1{
 
     void Preprocess::initialize()
     {
-        std::cout << colouredString("init Montador Class", GREEN, BOLD) << std::endl;
+        std::cout << colouredString("init Preprocess Class", GREEN, BOLD) << std::endl;
 
         for (const auto opcode:  default_opcodes_){
             if (opcodes_.find(opcode.first) == opcodes_.end()){
@@ -30,13 +30,17 @@ namespace trabalho1{
     {   
         std::string code_line; 
 
-        std::ifstream ReadFile("bin.asm");
+        std::ifstream ReadFile(arg);
 
-        while(getline(ReadFile, code_line)) {
+        while(getline(ReadFile, code_line)){
 
-            code_line = to_capital_letter(code_line);
+            if (!code_line.empty()){
 
-            vector_code_line_.push_back(code_line);
+                code_line = to_capital_letter(code_line);
+
+                vector_code_line_.push_back(code_line);
+
+            }
         }
         
         //  std::cout << opcodes_["ADD"][1] << std::endl;
@@ -45,9 +49,17 @@ namespace trabalho1{
     }
 
     std::string Preprocess::to_capital_letter(std::string code_line)
-    {
-        boost::to_upper(code_line);
-        return code_line;
+    {   
+        std::string code_line_uppper;
+
+        for (int i = 0; i < code_line.size(); i++) {
+    
+            if (code_line[i] != ';'){
+                code_line_uppper.push_back(toupper(code_line[i]));
+            }
+        }
+        
+        return code_line_uppper;
     }
 
 

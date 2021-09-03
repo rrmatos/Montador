@@ -12,8 +12,12 @@ include_directories(
   ${catkin_INCLUDE_DIRS}
 )
 
+add_library(Montador SHARED  src/Montador.cpp include/trabalho1/Montador.hpp)
 add_library(Preprocess SHARED  src/Preprocess.cpp include/trabalho1/Preprocess.hpp)
 add_library(utils SHARED src/utils.cpp include/trabalho1/utils.h)
+
+install(TARGETS Montador DESTINATION lib)
+install(FILES src/Montador.hpp DESTINATION include)
 
 install(TARGETS Preprocess DESTINATION lib)
 install(FILES src/Preprocess.hpp DESTINATION include)
@@ -21,5 +25,5 @@ install(FILES src/Preprocess.hpp DESTINATION include)
 install(TARGETS utils DESTINATION lib)
 install(FILES src/utils.h DESTINATION include)
 
-add_executable(montador src/montador.cpp src/Preprocess.cpp src/utils.cpp)
+add_executable(montador src/main.cpp src/Montador.cpp src/Preprocess.cpp src/utils.cpp)
 
