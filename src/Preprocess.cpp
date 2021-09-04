@@ -34,11 +34,13 @@ namespace trabalho1{
 
         while(getline(ReadFile, code_line)){
 
-            if (!code_line.empty()){
+            if (!code_line.empty() and code_line[0] != ';'){
 
                 code_line = to_capital_letter(code_line);
-
-                vector_code_line_.push_back(code_line);
+                if (!code_line.empty()){
+                    vector_code_line_.push_back(code_line);
+                }
+                
 
             }
         }
@@ -51,14 +53,21 @@ namespace trabalho1{
     std::string Preprocess::to_capital_letter(std::string code_line)
     {   
         std::string code_line_uppper;
+        int j = 0;
+        
+        while (code_line[j] == ' '){
+            j++;
+        }
 
-        for (int i = 0; i < code_line.size(); i++) {
-    
-            if (code_line[i] != ';'){
+        for (int i = j; i < code_line.size(); i++) {
+            
+            if (code_line[i] == ';'){
+                break;
+            }else{
                 code_line_uppper.push_back(toupper(code_line[i]));
             }
-        }
-        
+
+        }    
         return code_line_uppper;
     }
 
@@ -71,6 +80,7 @@ namespace trabalho1{
         for (auto code_line: vector_code_line_){
 
             if (code_line == "SECTION TEXT"){
+                i++;
                 break;
             }else{
                 i++;
@@ -85,9 +95,13 @@ namespace trabalho1{
         }
 
         
-       for ( int j = 0 ; j < section_text_idx ; j++){
+        for ( int j = 0 ; j < section_text_idx ; j++){
 
-            vector_code_line_stf_.push_back(vector_code_line_[j]);
+            if (vector_code_line_[j] != "SECTION DATA" and vector_code_line_[j] != "SECTION TEXT"){
+
+                vector_code_line_stf_.push_back(vector_code_line_[j]);
+
+            }     
         }
 
         for (auto code_line: vector_code_line_stf_){
