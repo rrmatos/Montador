@@ -4,7 +4,7 @@
 int main(int argc, char* argv[]){ 
 
     trabalho1::Preprocess preprocess;
-    trabalho1::Montador m;
+    trabalho1::Montador montador;
 
     
     // preprocess.show_arg_name(argv[1]);
@@ -13,8 +13,20 @@ int main(int argc, char* argv[]){
 
     preprocess.section_text_first();
 
+    montador.recive_code(preprocess.get_code());
+
+
+
+    // for (auto code_line: montador.vector_code_line){
+            
+    //   std::cout << code_line << std::endl;
+            
+    // }
+
+    montador.get_instru_rot_dire();
+
     // m.show_table();
-    // std::cout << m.get_simble_idx("RET") << std::endl;
+    // std::cout << montador.get_simble_idx("RET") << std::endl;
 
 
 

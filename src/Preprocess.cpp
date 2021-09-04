@@ -11,12 +11,6 @@ namespace trabalho1{
     void Preprocess::initialize()
     {
         std::cout << colouredString("init Preprocess Class", GREEN, BOLD) << std::endl;
-
-        for (const auto opcode:  default_opcodes_){
-            if (opcodes_.find(opcode.first) == opcodes_.end()){
-                opcodes_.insert(opcode);
-            }
-        }
     }
 
     void Preprocess::show_arg_name(std::string arg)
@@ -104,12 +98,17 @@ namespace trabalho1{
             }     
         }
 
-        for (auto code_line: vector_code_line_stf_){
+        // for (auto code_line: vector_code_line_stf_){
             
-            std::cout << code_line << std::endl;
+        //     std::cout << code_line << std::endl;
             
-        }
+        // }
 
+    }
+
+    std::vector<std::string> Preprocess::get_code()
+    {
+        return vector_code_line_stf_;
     }
 
 }   
