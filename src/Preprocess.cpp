@@ -23,6 +23,7 @@ namespace trabalho1{
     void Preprocess::read_code_file(std::string arg)
     {   
         std::string code_line; 
+        int line_number = 1;
 
         std::ifstream ReadFile(arg);
 
@@ -32,11 +33,11 @@ namespace trabalho1{
 
                 code_line = to_capital_letter(code_line);
                 if (!code_line.empty()){
-                    vector_code_line_.push_back(code_line);
+                    vector_code_line_.code_line.push_back(code_line);
+                    vector_code_line_.line.push_back(line_number );
                 }
-                
-
             }
+            line_number++;
         }
         
         //  std::cout << opcodes_["ADD"][1] << std::endl;
@@ -71,7 +72,7 @@ namespace trabalho1{
         int i = 0;
         int section_text_idx = 0;
         
-        for (auto code_line: vector_code_line_){
+        for (auto code_line: vector_code_line_.code_line){
 
             if (code_line == "SECTION TEXT"){
                 i++;
@@ -83,30 +84,33 @@ namespace trabalho1{
 
         section_text_idx = i;
 
-        for ( i; i < vector_code_line_.size(); i++){
+        for ( i; i < vector_code_line_.code_line.size(); i++){
 
-            vector_code_line_stf_.push_back(vector_code_line_[i]);
+            vector_code_line_stf_.code_line.push_back(vector_code_line_.code_line[i]);
+            vector_code_line_stf_.line.push_back(vector_code_line_.line[i]);
         }
 
         
         for ( int j = 0 ; j < section_text_idx ; j++){
 
-            if (vector_code_line_[j] != "SECTION DATA" and vector_code_line_[j] != "SECTION TEXT"){
+            if (vector_code_line_.code_line[j] != "SECTION DATA" and vector_code_line_.code_line[j] != "SECTION TEXT"){
 
-                vector_code_line_stf_.push_back(vector_code_line_[j]);
+                vector_code_line_stf_.code_line.push_back(vector_code_line_.code_line[j]);
+                vector_code_line_stf_.line.push_back(vector_code_line_.line[j]);
+
 
             }     
         }
 
-        // for (auto code_line: vector_code_line_stf_){
+        // for (int i = 0; i < vector_code_line_stf_.code_line.size(); i++){
             
-        //     std::cout << code_line << std::endl;
+        //     std::cout << vector_code_line_stf_.code_line[i] << " :"<< vector_code_line_stf_.line[i]<<std::endl;
             
         // }
 
     }
 
-    std::vector<std::string> Preprocess::get_code()
+    Preprocess::conde_struct Preprocess::get_code()
     {
         return vector_code_line_stf_;
     }

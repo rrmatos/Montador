@@ -19,55 +19,198 @@ namespace trabalho1{
         }
     }
 
-    void Montador::recive_code(std::vector<std::string> code_line)
+    void Montador::recive_code(Preprocess::conde_struct code_line)
     {
         vector_code_line_ = code_line;
         vector_code_line = code_line;
     }
 
 
-    std::string Montador::get_instru_rot_dire()
+    void Montador::montar()
     {
 
-        std::string instru_rot_dire;
+        std::string buffer, code_obj , instrution, diretive, label;
+        
+        int idx_line = 0;
+        int eddress_counter = 0;
 
-        for (auto code_line : vector_code_line_){
+        bool op_code;
 
+        for (auto code_line : vector_code_line_.code_line){
+
+            op_code = false;
 
             for (int i = 0; i <= code_line.size(); i++){
                 
-                if ((code_line[i] != ' ') and (i != code_line.size())){
+                if ((code_line[i] != ' ') and (code_line[i] != ',')and (i != code_line.size())){
                     
-                    instru_rot_dire.push_back(code_line[i]);
+                    buffer.push_back(code_line[i]);
+                }
+                // if (buffer.size() == buffer.empty()){}
+                else{
 
-                }else{
 
-                    if (instru_rot_dire.back() == ':'){
+                    if (buffer.back() == ':'){
 
-                        instru_rot_dire.pop_back();
+                        buffer.pop_back();
 
-                        std::cout << "rotulo --> "<< instru_rot_dire <<std::endl;
+                        if (SimTable_.empty()){
+
+                            line_table_.list.clear();
+                            line_table_.simble = buffer;
+                            line_table_.list.push_back(eddress_counter);
+                            line_table_.def = true;
+                            SimTable_.push_back(line_table_);
+                            
+
+                        }else{
+
+                            for (int k = 0; k < SimTable_.size(); k++){
+                                // std::cout << SimTable_.size() <<std::endl;
+                            
+                                if (SimTable_[k].simble == buffer){
+                                    
+                                    SimTable_[k].simble = buffer;
+                                    SimTable_[k].value= eddress_counter;
+                                    SimTable_[k].def = true;
+                                    break;
+
+                                }
+                                if ((k+1) == SimTable_.size()){
+
+                                    line_table_.simble = buffer;
+                                    line_table_.value= eddress_counter;
+                                    line_table_.list.clear();
+                                    line_table_.def = true;
+                                    
+                                    SimTable_.push_back(line_table_);
+
+                                }
+
+                            }
+
+                        }     
+                        
+
+                        std::cout << "rotulo --> "<< buffer <<std::endl;
+                        buffer.clear();
 
                     }else{
-                        if (opcodes_.find(instru_rot_dire) == opcodes_.end()){
-                            std::cout << colouredString("Error: The ", RED, BOLD) << colouredString(instru_rot_dire, RED, BOLD)<<  colouredString(" is not valid struction", RED, BOLD) <<std::endl;
-                        }else{
-                        std::cout << "instrucao -->"<< instru_rot_dire << " op: "<< opcodes_[instru_rot_dire][0] << " len: "<< opcodes_[instru_rot_dire][1]<< std::endl;
-                        }
-                    }
-                    // std::cout <<instru_rot_dire << std::endl;
-                    instru_rot_dire.clear();
+                        if (opcodes_.find(buffer) == opcodes_.end()){
 
-                    break;
+                            if (op_code){
+
+
+                                if (SimTable_.empty()){
+
+                                        line_table_.list.clear();
+                                        line_table_.simble = buffer;
+                                        line_table_.list.push_back(eddress_counter);
+                                        line_table_.def = false;
+                                        SimTable_.push_back(line_table_);
+
+                                }else{
+
+                                    for (int k = 0; k < SimTable_.size(); k++){
+                            
+                                        if (SimTable_[k].simble == buffer){
+                                            if (buffer == "DOIS"){
+                                                    std::cout << buffer <<std::endl;
+                                                    std::cout << eddress_counter<<std::endl;
+                                            }
+                                            
+                                            
+
+                                            if (SimTable_[k].def != true){
+
+
+                                                SimTable_[k].list.push_back(eddress_counter);
+    
+                                            }
+                                            //  colocar o endereco
+                                            break;
+
+                                        }
+
+                                        if ((k+1) == SimTable_.size()){
+                                            
+
+                                            if (buffer == "DOIS"){
+                                                    std::cout << buffer <<" false"<<std::endl;
+                                                    std::cout << eddress_counter<<std::endl;
+                                            }
+
+                                            line_table_.list.clear();
+                                            line_table_.simble = buffer;
+                                            line_table_.list.push_back(eddress_counter);
+                                            line_table_.def = false;
+                                            SimTable_.push_back(line_table_);
+
+                                            break;
+
+                                        }
+                                    }
+                                }
+
+                                std::cout << "fim do for"<<std::endl;
+                                
+
+                                eddress_counter = eddress_counter + 1;
+                                buffer.clear();
+
+
+                            }else{
+
+                                (std::cout << colouredString("Error in line ", RED, BOLD)
+                                <<colouredString(std::to_string(vector_code_line_.line[idx_line]), RED, BOLD)
+                                <<colouredString(": ", RED, BOLD)
+                                << colouredString(buffer, RED, BOLD) 
+                                <<  colouredString(" is not valid struction", RED, BOLD) <<std::endl);
+                                buffer.clear();
+
+                            }
+
+                            
+
+                        }else{
+                            std::cout << "instrucao -->"<< buffer << " op: "<< opcodes_[buffer][0] << " len: "<< opcodes_[buffer][1]<< std::endl;
+                            
+                            eddress_counter = eddress_counter + 1; //stoi(opcodes_[buffer][1]);
+
+
+                            op_code = true;
+
+                            code_obj.push_back(opcodes_[buffer][0][0]);
+                            code_obj.push_back(opcodes_[buffer][0][1]);
+                            code_obj.push_back(' ');
+                            buffer.clear();
+
+                            
+                        }
+
+
+
+                    }
+
+
+                        // break;
                     
                 }
 
+                
+
+   
             }
+
+            // buffer.clear();
+            
+            idx_line++;
+            
             // break;
     
             
         }
-        return "test";
+        
     }
 
     int Montador::get_simble_idx(std::string simble)
@@ -92,25 +235,16 @@ namespace trabalho1{
 
     void Montador::show_table()
     {
-        sim_table_test_.simble = "N";
-        sim_table_test_.value = 3;
-        sim_table_test_.def = false;
-        sim_table_test_.list = {1,2,3};
- 
-
-        SimTable_.push_back(sim_table_test_);
-
-        sim_table_test_.simble = "FAT";
-        sim_table_test_.value = 0;
-        sim_table_test_.def = true;
-        sim_table_test_.list = {1};
- 
-
-        SimTable_.push_back(sim_table_test_);
         
         for (auto line_table : SimTable_){
 
-            std::cout << line_table.simble << line_table.value << line_table.def << line_table.list[0] << std::endl;
+            std::cout << "sim: " << line_table.simble <<" vlr: " <<line_table.value << " def: "<<line_table.def << " list: ";
+            for (auto x : line_table.list){
+                std::cout << x << " ";
+            }
+            std::cout << std::endl;
+
+
         }
 
     }

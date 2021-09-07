@@ -5,6 +5,8 @@
 #include <vector>
 #include <array>
 #include <unordered_map> 
+#include <trabalho1/Preprocess.hpp>
+
 
 
 namespace trabalho1{
@@ -16,14 +18,17 @@ namespace trabalho1{
             Montador();
             ~Montador() {};
 
+            
+
             void show_table();
             void populate_simble_table();
-            void recive_code(std::vector<std::string> code_line);
+            void recive_code(Preprocess::conde_struct code_line);
             int get_simble_idx(std::string simble);
             std::string get_instru_rot_dire();
+            void montar();
 
 
-            std::vector<std::string> vector_code_line;
+            Preprocess::conde_struct vector_code_line;
 
 
         private:
@@ -49,19 +54,19 @@ namespace trabalho1{
             };
 
             void initialize();
-            std::vector<std::string> vector_code_line_;
-            int position_counter = 0;
-            int line_counter = 1;
+            Preprocess::conde_struct vector_code_line_;
+            
 
             struct sim_table_uni_
                 {
                     std::string simble;
                     int value;
-                    bool def ;
+                    bool def = false ;
                     std::vector<int> list; 
                 };
 
             sim_table_uni_ sim_table_test_;
+            sim_table_uni_ line_table_;
             std::vector<sim_table_uni_> SimTable_;
                   
     };

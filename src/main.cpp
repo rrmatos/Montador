@@ -17,15 +17,20 @@ int main(int argc, char* argv[]){
 
 
 
-    // for (auto code_line: montador.vector_code_line){
+    // for (int i = 0; i < montador.vector_code_line.code_line.size(); i++){
             
-    //   std::cout << code_line << std::endl;
+    //     std::cout << montador.vector_code_line.code_line[i] << " :"<< montador.vector_code_line.line[i]<<std::endl;
             
     // }
 
-    montador.get_instru_rot_dire();
+    //  std::cout << "--------------------------------------------------------------------"<<std::endl;
+            
+    montador.montar();
 
-    // m.show_table();
+     std::cout << "--------------------------------------------------------------------"<<std::endl;
+    
+
+    montador.show_table();
     // std::cout << montador.get_simble_idx("RET") << std::endl;
 
 

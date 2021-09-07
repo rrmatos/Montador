@@ -14,17 +14,24 @@ namespace trabalho1{
         public:
             Preprocess();
             ~Preprocess() {};
+
+            struct conde_struct
+                {
+                    std::vector<std::string> code_line;
+                    std::vector<int> line; 
+                };
         
             void show_arg_name(std::string arg);
             void read_code_file(std::string file_name);
             void section_text_first();
-            std::vector<std::string> get_code();
+            conde_struct get_code();
             std::string to_capital_letter(std::string code_line);
 
         private:
             void initialize();
+
             std::string file_name_;
-            std::vector<std::string> vector_code_line_, vector_code_line_stf_;
+            conde_struct vector_code_line_, vector_code_line_stf_;
                     
     };
 
