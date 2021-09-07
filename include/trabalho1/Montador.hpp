@@ -24,22 +24,17 @@ namespace trabalho1{
             
 
             void show_table();
-            void populate_simble_table();
             void recive_code(Preprocess::conde_struct code_line);
             int get_simble_idx(std::string simble);
-            std::string get_instru_rot_dire();
             std::vector<std::string> get_tokens_in_line(std::string code_line);
             void label_found(std::string sim, int eddress_counter);
             bool check_sim_table(std::string sim);
             void add_sim_in_list(std::string sim, int eddress_counter);
-
             void solve_pendency(std::string sim);
+            void generete_obj_file();
+
 
             void montar();
-
-
-            Preprocess::conde_struct vector_code_line;
-
 
         private:
 

@@ -28,17 +28,13 @@ namespace trabalho1{
     void Montador::recive_code(Preprocess::conde_struct code_line)
     {
         vector_code_line_ = code_line;
-        vector_code_line = code_line;
     }
-
 
     void Montador::montar()
     {
         std::vector<std::string> line_tokens;
         
         int eddress_counter = 0;
-
-
 
         for (auto code_line : vector_code_line_.code_line){
 
@@ -70,20 +66,12 @@ namespace trabalho1{
 
                         }else{
                             
-
                             code_obj.push_back(std::to_string(get_simble_idx(token)));
                             eddress_counter++;
-
                         }
                     }
 
                 }else if(!(directive_.find(line_tokens.front()) == directive_.end())){
-
-                    // std::cout << "directive: " << line_tokens.front() <<std::endl;
-                    // // line_tokens.erase(line_tokens.begin());
-
-                    // std::cout << "directive: " << line_tokens.front().front() <<std::endl;
-
 
                     switch (line_tokens.front().front()){
 
@@ -106,10 +94,7 @@ namespace trabalho1{
 
                     std::cout << "erro " <<std::endl;
                     std::cout << "opcode "<< line_tokens.front() <<std::endl;
-
-
                 }
-
 
             }else if(!(opcodes_.find(line_tokens.front()) == opcodes_.end())){
                 
@@ -133,8 +118,6 @@ namespace trabalho1{
                     }
                 }
 
-                
-
             }else if(!(directive_.find(line_tokens.front()) == directive_.end())){
 
                 std::cout << "directive: " << line_tokens.front() <<std::endl;
@@ -143,12 +126,8 @@ namespace trabalho1{
 
                 std::cout << "erro " <<std::endl;
                 std::cout << "opcode "<< line_tokens.front() <<std::endl;
-
-
             }
- 
-        }
-        
+        }  
     }
 
     int Montador::get_simble_idx(std::string sim)
@@ -296,7 +275,6 @@ namespace trabalho1{
         }
 
         line_table_.list.clear();
-
     }
 
     bool Montador::check_sim_table(std::string sim){
@@ -310,11 +288,19 @@ namespace trabalho1{
         }
 
         return false;
-
     }
 
-    void Montador::show_table()
-    {
+    void Montador::generete_obj_file(){
+
+        std::ofstream MyFile("bin.obj");
+
+        for (auto y : code_obj){
+            MyFile << y << " ";
+        }
+    }
+
+
+    void Montador::show_table(){
         
         for (auto line_table : SimTable_){
 
@@ -333,5 +319,4 @@ namespace trabalho1{
         }
         std::cout << std::endl;
     }
-
 }   
