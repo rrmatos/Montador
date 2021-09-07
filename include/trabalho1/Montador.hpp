@@ -5,6 +5,7 @@
 #include <vector>
 #include <array>
 #include <unordered_map> 
+#include <cstring>
 #include <trabalho1/Preprocess.hpp>
 
 
@@ -25,6 +26,7 @@ namespace trabalho1{
             void recive_code(Preprocess::conde_struct code_line);
             int get_simble_idx(std::string simble);
             std::string get_instru_rot_dire();
+            void get_tokens_in_line(std::string code_line);
             void montar();
 
 

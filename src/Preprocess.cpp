@@ -33,6 +33,13 @@ namespace trabalho1{
 
                 code_line = to_capital_letter(code_line);
                 if (!code_line.empty()){
+
+                    while(code_line.back() == ' '){
+                        // std::cout << code_line << std::endl;
+
+                        code_line.pop_back();
+                    }
+
                     vector_code_line_.code_line.push_back(code_line);
                     vector_code_line_.line.push_back(line_number );
                 }
