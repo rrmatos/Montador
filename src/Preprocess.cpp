@@ -22,6 +22,7 @@ namespace trabalho1{
 
     void Preprocess::read_code_file(std::string arg)
     {   
+        file_name_ = arg;
         std::string code_line; 
         int line_number = 1;
 
@@ -120,6 +121,10 @@ namespace trabalho1{
     Preprocess::conde_struct Preprocess::get_code()
     {
         return vector_code_line_stf_;
+    }
+
+    std::string Preprocess::get_file_name(){
+        return file_name_;
     }
 
 }   

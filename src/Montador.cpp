@@ -36,9 +36,15 @@ namespace trabalho1{
         
         int eddress_counter = 0;
 
-        for (auto code_line : vector_code_line_.code_line){
+        for (int idx = 0; idx < vector_code_line_.code_line.size(); idx++){
+
+
+            auto code_line = vector_code_line_.code_line[idx];
+            int line_number = vector_code_line_.line[idx];
 
             line_tokens = get_tokens_in_line(code_line);
+
+            detect_error(line_tokens, line_number);
 
             if (line_tokens.front().back() == ':'){
 
@@ -62,7 +68,7 @@ namespace trabalho1{
                             
                             add_sim_in_list(token, eddress_counter);
                             eddress_counter++;
-                            code_obj.push_back("-");
+                            code_obj.push_back("0");
 
                         }else{
                             
@@ -81,7 +87,18 @@ namespace trabalho1{
                             break;
 
                         case('S'):
-                         
+
+                            if (line_tokens.size() > 1){
+
+                                for (int i = 0; i < std::stoi(line_tokens.back()); i++){
+                                    std::cout << i <<" "<< line_tokens.size() << " "<<std::stoi(line_tokens.back())<<std::endl;
+                                    code_obj.push_back("0");
+
+                                }
+
+                                break;
+                            }
+                            
                             code_obj.push_back("0");
                             break;
 
@@ -106,7 +123,7 @@ namespace trabalho1{
                 for (auto token : line_tokens){
  
                     if(!check_sim_table(token)){
-                        code_obj.push_back("-");
+                        code_obj.push_back("0");
                         add_sim_in_list(token, eddress_counter);
                         eddress_counter++;
 
@@ -130,6 +147,14 @@ namespace trabalho1{
         }  
     }
 
+
+
+    void Montador::detect_error(std::vector<std::string> tokens, int line){
+
+        std::cout <<  colouredString("detect_error is not working yet", YELLOW, BOLD)<<std::endl;
+
+    }
+
     int Montador::get_simble_idx(std::string sim)
     {
         for (auto line_table : SimTable_){
@@ -145,11 +170,11 @@ namespace trabalho1{
     std::vector<std::string> Montador::get_tokens_in_line(std::string code_line){
 
         std::vector<std::string> tokens;
-        std::string space = " ", comma = ",", token;
+        std::string mais = "+", space = " ", comma = ",", token;
         size_t pos = 0;
         size_t pos1 = 0;
 
-        while (((pos = code_line.find(space)) != std::string::npos) or (pos = code_line.find(comma)) != std::string::npos) {
+        while (((pos = code_line.find(space)) != std::string::npos) or (pos = code_line.find(comma)) != std::string::npos or (pos = code_line.find(mais)) != std::string::npos) {
 
             token = code_line.substr(0, pos);
             
@@ -221,6 +246,8 @@ namespace trabalho1{
 
     }
 
+    
+
     void  Montador:: solve_pendency(std::string sim){
 
         for (auto line_table : SimTable_){
@@ -228,8 +255,8 @@ namespace trabalho1{
             if (line_table.simble == sim){
 
                 for (auto idx : line_table.list){
-
-                    code_obj[idx] = std::to_string(line_table.value);
+                    // std::cout << code_obj[idx] << std::endl;
+                    code_obj[idx] = std::to_string(std::stoi(code_obj[idx]) + line_table.value);
                 }
 
             }
@@ -290,15 +317,22 @@ namespace trabalho1{
         return false;
     }
 
+    void Montador::set_file_name(std::string file_name){
+        file_name.pop_back();
+        file_name.pop_back();
+        file_name.pop_back();
+        file_name_ = file_name;
+        std::cout <<  file_name << std::endl;
+    }
+
     void Montador::generete_obj_file(){
 
-        std::ofstream MyFile("bin.obj");
+        std::ofstream MyFile( file_name_ + "obj");
 
         for (auto y : code_obj){
             MyFile << y << " ";
         }
     }
-
 
     void Montador::show_table(){
         

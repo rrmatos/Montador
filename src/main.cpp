@@ -12,6 +12,8 @@ int main(int argc, char* argv[]){
 
   preprocess.section_text_first();
 
+  montador.set_file_name(preprocess.get_file_name());
+
   montador.recive_code(preprocess.get_code());
           
   montador.montar();

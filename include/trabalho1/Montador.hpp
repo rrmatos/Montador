@@ -30,14 +30,17 @@ namespace trabalho1{
             void label_found(std::string sim, int eddress_counter);
             bool check_sim_table(std::string sim);
             void add_sim_in_list(std::string sim, int eddress_counter);
+            void detect_error(std::vector<std::string> tokens, int line);
             void solve_pendency(std::string sim);
             void generete_obj_file();
+            void set_file_name(std::string file_name);
 
 
             void montar();
 
         private:
 
+            std::string file_name_;
             std::vector<std::string> op_word_len, code_obj;
             Param opcodes_;
             Param_d directive_;
@@ -66,6 +69,7 @@ namespace trabalho1{
             };
 
             void initialize();
+
             Preprocess::conde_struct vector_code_line_;
             
 

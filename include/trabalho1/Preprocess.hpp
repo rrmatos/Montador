@@ -26,6 +26,7 @@ namespace trabalho1{
             void section_text_first();
             conde_struct get_code();
             std::string to_capital_letter(std::string code_line);
+            std::string get_file_name();
 
         private:
             void initialize();
