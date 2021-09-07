@@ -17,6 +17,12 @@ namespace trabalho1{
                 opcodes_.insert(opcode);
             }
         }
+
+        for (const auto directive:  default_directive_){
+            if (directive_.find(directive.first) == directive_.end()){
+                directive_.insert(directive);
+            }
+        }
     }
 
     void Montador::recive_code(Preprocess::conde_struct code_line)
@@ -28,7 +34,7 @@ namespace trabalho1{
 
     void Montador::montar()
     {
-        std::vector<std::string> line_tokens, code_obj;
+        std::vector<std::string> line_tokens;
         
         int eddress_counter = 0;
 
@@ -43,7 +49,9 @@ namespace trabalho1{
                 line_tokens.front().pop_back();
                 
                 label_found(line_tokens.front(), eddress_counter);
+
                 eddress_counter++;
+
                 line_tokens.erase(line_tokens.begin());
 
                 if(!(opcodes_.find(line_tokens.front()) == opcodes_.end())){
@@ -55,9 +63,10 @@ namespace trabalho1{
                     for (auto token : line_tokens){
 
                         if(!check_sim_table(token)){
-        
+                            
                             add_sim_in_list(token, eddress_counter);
                             eddress_counter++;
+                            code_obj.push_back("-");
 
                         }else{
                             
@@ -68,6 +77,31 @@ namespace trabalho1{
                         }
                     }
 
+                }else if(!(directive_.find(line_tokens.front()) == directive_.end())){
+
+                    // std::cout << "directive: " << line_tokens.front() <<std::endl;
+                    // // line_tokens.erase(line_tokens.begin());
+
+                    // std::cout << "directive: " << line_tokens.front().front() <<std::endl;
+
+
+                    switch (line_tokens.front().front()){
+
+                        case('C'):  
+
+                            code_obj.push_back(line_tokens.back());
+                            break;
+
+                        case('S'):
+                         
+                            code_obj.push_back("0");
+                            break;
+
+                        default:
+                            std::cout <<  colouredString("Invalid String command.", RED, BOLD)<<std::endl;
+                            break;
+                    }
+            
                 }else{
 
                     std::cout << "erro " <<std::endl;
@@ -87,7 +121,7 @@ namespace trabalho1{
                 for (auto token : line_tokens){
  
                     if(!check_sim_table(token)){
-                        
+                        code_obj.push_back("-");
                         add_sim_in_list(token, eddress_counter);
                         eddress_counter++;
 
@@ -101,6 +135,10 @@ namespace trabalho1{
 
                 
 
+            }else if(!(directive_.find(line_tokens.front()) == directive_.end())){
+
+                std::cout << "directive: " << line_tokens.front() <<std::endl;
+            
             }else{
 
                 std::cout << "erro " <<std::endl;
@@ -181,6 +219,7 @@ namespace trabalho1{
                     SimTable_[k].value= eddress_counter;
                     SimTable_[k].def = true;
 
+                    solve_pendency(sim);
                     has_reached = true;
                     break;
 
@@ -200,6 +239,22 @@ namespace trabalho1{
                 }
 
         }  
+
+    }
+
+    void  Montador:: solve_pendency(std::string sim){
+
+        for (auto line_table : SimTable_){
+
+            if (line_table.simble == sim){
+
+                for (auto idx : line_table.list){
+
+                    code_obj[idx] = std::to_string(line_table.value);
+                }
+
+            }
+        }
 
     }
 
@@ -269,9 +324,14 @@ namespace trabalho1{
             }
             std::cout << std::endl;
 
-
         }
 
+        for (auto y : code_obj){
+
+            std::cout << y << " ";
+
+        }
+        std::cout << std::endl;
     }
 
 }   

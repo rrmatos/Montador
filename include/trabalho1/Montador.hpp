@@ -14,6 +14,7 @@
 namespace trabalho1{
 
     using Param = std::unordered_map<std::string, std::vector<std::string>>;
+    using Param_d = std::unordered_map<std::string, std::string>;
 
     class Montador{
         public:
@@ -32,6 +33,8 @@ namespace trabalho1{
             bool check_sim_table(std::string sim);
             void add_sim_in_list(std::string sim, int eddress_counter);
 
+            void solve_pendency(std::string sim);
+
             void montar();
 
 
@@ -40,24 +43,31 @@ namespace trabalho1{
 
         private:
 
-            std::vector<std::string> op_word_len;
+            std::vector<std::string> op_word_len, code_obj;
             Param opcodes_;
+            Param_d directive_;
+
             const Param default_opcodes_ = {  
-                    std::make_pair("ADD",    (op_word_len = {"01", "2"})),
-                    std::make_pair("ADD",    (op_word_len = {"01", "2"})),
-                    std::make_pair("SUB",    (op_word_len = {"02", "2"})),
-                    std::make_pair("MULT",   (op_word_len = {"03", "2"})),
-                    std::make_pair("DIV",    (op_word_len = {"04", "2"})),
-                    std::make_pair("JMP",    (op_word_len = {"05", "2"})),
-                    std::make_pair("JMPN",   (op_word_len = {"06", "2"})),
-                    std::make_pair("JMPP",   (op_word_len = {"07", "2"})),
-                    std::make_pair("JMPZ",   (op_word_len = {"08", "2"})),
-                    std::make_pair("COPY",   (op_word_len = {"09", "3"})),
-                    std::make_pair("LOAD",   (op_word_len = {"10", "2"})),
-                    std::make_pair("STORE",  (op_word_len = {"11", "2"})),
-                    std::make_pair("INPUT",  (op_word_len = {"12", "2"})),
-                    std::make_pair("OUTPUT", (op_word_len = {"13", "2"})),
-                    std::make_pair("STOP",   (op_word_len = {"14", "1"}))
+                std::make_pair("ADD",    (op_word_len = {"1", "2"})),
+                std::make_pair("ADD",    (op_word_len = {"1", "2"})),
+                std::make_pair("SUB",    (op_word_len = {"2", "2"})),
+                std::make_pair("MULT",   (op_word_len = {"3", "2"})),
+                std::make_pair("DIV",    (op_word_len = {"4", "2"})),
+                std::make_pair("JMP",    (op_word_len = {"5", "2"})),
+                std::make_pair("JMPN",   (op_word_len = {"6", "2"})),
+                std::make_pair("JMPP",   (op_word_len = {"7", "2"})),
+                std::make_pair("JMPZ",   (op_word_len = {"8", "2"})),
+                std::make_pair("COPY",   (op_word_len = {"9", "3"})),
+                std::make_pair("LOAD",   (op_word_len = {"10", "2"})),
+                std::make_pair("STORE",  (op_word_len = {"11", "2"})),
+                std::make_pair("INPUT",  (op_word_len = {"12", "2"})),
+                std::make_pair("OUTPUT", (op_word_len = {"13", "2"})),
+                std::make_pair("STOP",   (op_word_len = {"14", "1"}))
+            };
+
+            const Param_d default_directive_ = {  
+                std::make_pair("CONST", "store const in memory"),
+                std::make_pair("SPACE", "reserve memory space"),
             };
 
             void initialize();
