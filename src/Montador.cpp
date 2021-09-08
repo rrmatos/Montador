@@ -41,79 +41,111 @@ namespace trabalho1{
 
             auto code_line = vector_code_line_.code_line[idx];
             int line_number = vector_code_line_.line[idx];
+            std::string imediate;
 
             line_tokens = get_tokens_in_line(code_line);
 
             detect_error(line_tokens, line_number);
-
+          
+                
             if (line_tokens.front().back() == ':'){
 
+               
                 line_tokens.front().pop_back();
                 
                 label_found(line_tokens.front(), eddress_counter);
 
-                eddress_counter++;
+                // eddress_counter++;
 
                 line_tokens.erase(line_tokens.begin());
 
-                if(!(opcodes_.find(line_tokens.front()) == opcodes_.end())){
+                if (!line_tokens.empty()){
 
-                    code_obj.push_back(opcodes_[line_tokens.front()][0]);
- 
-                    line_tokens.erase(line_tokens.begin()); // erase opcode
+                    eddress_counter++;
 
-                    for (auto token : line_tokens){
+                    if(!(opcodes_.find(line_tokens.front()) == opcodes_.end())){
 
-                        if(!check_sim_table(token)){
-                            
-                            add_sim_in_list(token, eddress_counter);
-                            eddress_counter++;
-                            code_obj.push_back("0");
+                        if (((line_tokens.front() == "LOAD") or (line_tokens.front() == "STORE")) and (line_tokens.size() == 3)){
+
+                            imediate = line_tokens.back();
+                            line_tokens.pop_back();
 
                         }else{
-                            
-                            code_obj.push_back(std::to_string(get_simble_idx(token)));
-                            eddress_counter++;
+
+                            imediate = "0";
+
                         }
-                    }
 
-                }else if(!(directive_.find(line_tokens.front()) == directive_.end())){
+                        code_obj.push_back(opcodes_[line_tokens.front()][0]);
+    
+                        line_tokens.erase(line_tokens.begin()); // erase opcode
 
-                    switch (line_tokens.front().front()){
+                        for (auto token : line_tokens){
 
-                        case('C'):  
+                            if(!check_sim_table(token)){
+                                
+                                add_sim_in_list(token, eddress_counter);
+                                eddress_counter++;
+                                code_obj.push_back(imediate);
 
-                            code_obj.push_back(line_tokens.back());
-                            break;
-
-                        case('S'):
-
-                            if (line_tokens.size() > 1){
-
-                                for (int i = 0; i < std::stoi(line_tokens.back()); i++){
-                                    std::cout << i <<" "<< line_tokens.size() << " "<<std::stoi(line_tokens.back())<<std::endl;
-                                    code_obj.push_back("0");
-
-                                }
-
-                                break;
+                            }else{
+                                
+                                code_obj.push_back(std::to_string(get_simble_idx(token)));
+                                eddress_counter++;
                             }
-                            
-                            code_obj.push_back("0");
-                            break;
+                        }
 
-                        default:
-                            std::cout <<  colouredString("Invalid String command.", RED, BOLD)<<std::endl;
-                            break;
+                    }else if(!(directive_.find(line_tokens.front()) == directive_.end())){
+
+                        switch (line_tokens.front().front()){
+
+                            case('C'):  
+
+                                code_obj.push_back(line_tokens.back());
+                                break;
+
+                            case('S'):
+
+                                if (line_tokens.size() > 1){
+
+                                    for (int i = 0; i < std::stoi(line_tokens.back()) - 1; i++){
+                                        // std::cout << i <<" "<< line_tokens.size() << " "<<std::stoi(line_tokens.back())<<std::endl;
+                                        code_obj.push_back("0");
+                                        eddress_counter++;
+
+                                    }
+                                    // code_obj.push_back("0");
+
+                                    break;
+                                }
+                                
+                                code_obj.push_back("0");
+                                break;
+
+                            default:
+                                std::cout <<  colouredString("Invalid String command.", RED, BOLD)<<std::endl;
+                                break;
+                        }
+                
+                    }else{
+
+                        std::cout << "erro " <<std::endl;
+                        std::cout << "opcode "<< line_tokens.front() <<std::endl;
                     }
-            
-                }else{
-
-                    std::cout << "erro " <<std::endl;
-                    std::cout << "opcode "<< line_tokens.front() <<std::endl;
                 }
 
             }else if(!(opcodes_.find(line_tokens.front()) == opcodes_.end())){
+
+                if (((line_tokens.front() == "LOAD") or (line_tokens.front() == "STORE")) and (line_tokens.size() == 3)){
+                   
+                    imediate = line_tokens.back();
+                    line_tokens.pop_back();
+
+                }else{
+
+                    imediate = "0";
+
+                }
                 
                 code_obj.push_back(opcodes_[line_tokens.front()][0]);
                 eddress_counter++;
@@ -123,7 +155,8 @@ namespace trabalho1{
                 for (auto token : line_tokens){
  
                     if(!check_sim_table(token)){
-                        code_obj.push_back("0");
+
+                        code_obj.push_back(imediate);
                         add_sim_in_list(token, eddress_counter);
                         eddress_counter++;
 
@@ -151,7 +184,7 @@ namespace trabalho1{
 
     void Montador::detect_error(std::vector<std::string> tokens, int line){
 
-        std::cout <<  colouredString("detect_error is not working yet", YELLOW, BOLD)<<std::endl;
+        // std::cout <<  colouredString("detect_error is not working yet", YELLOW, BOLD)<<std::endl;
 
     }
 
@@ -322,7 +355,6 @@ namespace trabalho1{
         file_name.pop_back();
         file_name.pop_back();
         file_name_ = file_name;
-        std::cout <<  file_name << std::endl;
     }
 
     void Montador::generete_obj_file(){
