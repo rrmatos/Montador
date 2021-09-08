@@ -8,9 +8,7 @@ int main(int argc, char* argv[]){
 
   // preprocess.show_arg_name(argv[1]);
 
-  preprocess.read_code_file(argv[1]);
-
-  preprocess.section_text_first();
+  preprocess.load_code_file(argv[1]);
 
   montador.set_file_name(preprocess.get_file_name());
 

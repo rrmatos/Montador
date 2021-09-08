@@ -84,6 +84,8 @@ namespace trabalho1{
             sim_table_uni_ sim_table_test_;
             sim_table_uni_ line_table_;
             std::vector<sim_table_uni_> SimTable_;
+            std::vector<std::string> invalchar_front_ = {"0", "1","2","3","4","5" "6", "7", "8", "9", "#", "," , ":", "/", "\\", "*", "-", "+"};
+            std::vector<std::string> invalchar_ = {"#", "," , ":", "/", "\\", "*", "-", "+"};
                   
     };
 

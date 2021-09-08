@@ -22,10 +22,10 @@ namespace trabalho1{
                 };
         
             void show_arg_name(std::string arg);
-            void read_code_file(std::string file_name);
-            void section_text_first();
+            void load_code_file(std::string file_name);
+            void stf(); 
             conde_struct get_code();
-            std::string to_capital_letter(std::string code_line);
+            std::string upper(std::string code_line);
             std::string get_file_name();
 
         private:

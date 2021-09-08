@@ -20,7 +20,7 @@ namespace trabalho1{
 
     }
 
-    void Preprocess::read_code_file(std::string arg)
+    void Preprocess::load_code_file(std::string arg)
     {   
         file_name_ = arg;
         std::string code_line; 
@@ -32,11 +32,11 @@ namespace trabalho1{
 
             if (!code_line.empty() and code_line[0] != ';'){
 
-                code_line = to_capital_letter(code_line);
+                code_line = upper(code_line);
                 if (!code_line.empty()){
 
                     while(code_line.back() == ' '){
-                        // std::cout << code_line << std::endl;
+                        std::cout << code_line << std::endl;
 
                         code_line.pop_back();
                     }
@@ -47,13 +47,12 @@ namespace trabalho1{
             }
             line_number++;
         }
-        
-        //  std::cout << opcodes_["ADD"][1] << std::endl;
        
         ReadFile.close();
+        stf();
     }
 
-    std::string Preprocess::to_capital_letter(std::string code_line)
+    std::string Preprocess::upper(std::string code_line)
     {   
         std::string code_line_uppper;
         int j = 0;
@@ -75,7 +74,7 @@ namespace trabalho1{
     }
 
 
-    void Preprocess::section_text_first()
+    void Preprocess::stf()
     {
         int i = 0;
         int section_text_idx = 0;

@@ -184,6 +184,15 @@ namespace trabalho1{
 
     void Montador::detect_error(std::vector<std::string> tokens, int line){
 
+        
+
+        // if (tokens.front())
+
+        // for (auto t : invalchar_){
+        //     std::cout <<  t << " ";
+
+        // }
+        // std::cout<<std::endl;
         // std::cout <<  colouredString("detect_error is not working yet", YELLOW, BOLD)<<std::endl;
 
     }
