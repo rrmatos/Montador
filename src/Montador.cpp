@@ -46,6 +46,8 @@ namespace trabalho1{
             line_tokens = get_tokens_in_line(code_line);
 
             detect_error(line_tokens, line_number);
+
+            // break;
           
                 
             if (line_tokens.front().back() == ':'){
@@ -177,23 +179,184 @@ namespace trabalho1{
                 std::cout << "erro " <<std::endl;
                 std::cout << "opcode "<< line_tokens.front() <<std::endl;
             }
-        }  
+        }
+          
+        semantic_analyzer();
+    }
+
+    void Montador::semantic_analyzer(){
+
+        for (auto table_line : SimTable_){
+            
+            if (table_line.def == false){
+                
+                (std::cout <<  colouredString("Semantic error detected: ", RED, BOLD)
+                << colouredString(table_line.simble, RED, BOLD)
+                <<  colouredString(" has not been defined", RED, BOLD) <<std::endl);
+                
+            }
+        }
+
     }
 
 
-
-    void Montador::detect_error(std::vector<std::string> tokens, int line){
+    bool Montador::detect_error(std::vector<std::string> tokens, int line){
 
         
+        scanner(tokens, line);
 
-        // if (tokens.front())
+        parser(tokens, line);
 
-        // for (auto t : invalchar_){
-        //     std::cout <<  t << " ";
+        return true;
 
-        // }
-        // std::cout<<std::endl;
-        // std::cout <<  colouredString("detect_error is not working yet", YELLOW, BOLD)<<std::endl;
+    }
+
+    bool Montador::scanner(std::vector<std::string> tokens, int line){
+
+        std::string str( 1, tokens.front().front());
+
+        //  std::cout << tokens.front() << std::endl;
+
+        if (find_element_vector_str(invalchar_front_, str)){
+
+            (std::cout <<  colouredString("Lexical error detected in : ", RED, BOLD)
+                << colouredString(tokens.front(), RED, BOLD)
+                <<  colouredString(" Line ", RED, BOLD) 
+                <<   colouredString(std::to_string(line), RED, BOLD) <<std::endl);
+
+            return false;
+            
+        }
+
+        if (find_element_vector_str(invalchar_, tokens.front())){
+
+            (std::cout <<  colouredString("Lexical error detected in : ", RED, BOLD)
+                << colouredString(tokens.front(), RED, BOLD)
+                <<  colouredString(" Line ", RED, BOLD) 
+                <<   colouredString(std::to_string(line), RED, BOLD) <<std::endl);
+
+            return false;
+
+        }
+
+        return true;
+
+    }
+
+    bool Montador::parser(std::vector<std::string> tokens, int line){
+
+        if (tokens.front().back() == ':'){
+  
+            tokens.erase(tokens.begin());
+
+        }
+
+        //  std::cout << tokens.front() << std::endl;
+
+        if((opcodes_.find(tokens.front()) == opcodes_.end())){
+
+            if((directive_.find(tokens.front()) == directive_.end())){
+             (std::cout <<  colouredString("Sintaxe error detected in ", RED, BOLD)
+                <<  colouredString(" Line ", RED, BOLD) 
+                <<   colouredString(std::to_string(line), RED, BOLD)
+                << colouredString(" ", RED, BOLD)
+                << colouredString(tokens.front(), RED, BOLD)
+                <<  colouredString(" is node a valid diretive ", RED, BOLD)  <<std::endl);
+
+                return false;
+
+            }else{
+
+                switch (tokens.front().front()){
+
+                    case('C'):  
+                        if (std::stoi(directive_[tokens.front()][1]) != tokens.size()){
+
+                            (std::cout <<  colouredString("Sintaxe error detected in ", RED, BOLD)
+                            <<  colouredString(" Line ", RED, BOLD) 
+                            <<   colouredString(std::to_string(line), RED, BOLD)
+                            << colouredString(" ", RED, BOLD)
+                            << colouredString(tokens.front(), RED, BOLD)
+                            <<  colouredString(" 1 args", RED, BOLD)  <<std::endl);
+
+                            return false;
+            
+                        }
+
+                    case('S'):
+
+                        // std::cout <<directive_[tokens.front()][1]<< tokens.size() << std::endl;
+    
+                        if (std::stoi(directive_[tokens.front()][1]) < tokens.size()){
+
+                            (std::cout <<  colouredString("Sintaxe error detected in ", RED, BOLD)
+                            <<  colouredString(" Line ", RED, BOLD) 
+                            <<   colouredString(std::to_string(line), RED, BOLD)
+                            << colouredString(" ", RED, BOLD)
+                            << colouredString(tokens.front(), RED, BOLD)
+                            <<  colouredString(" 0 ou 1 args", RED, BOLD)  <<std::endl);
+
+                            return false;
+                    
+                        }
+                }
+
+                return true;
+            }
+
+            (std::cout <<  colouredString("Sintaxe error detected in ", RED, BOLD)
+                <<  colouredString(" Line ", RED, BOLD) 
+                <<   colouredString(std::to_string(line), RED, BOLD)
+                << colouredString(" ", RED, BOLD)
+                << colouredString(tokens.front(), RED, BOLD)
+                <<  colouredString(" is node a valid struction ", RED, BOLD)  <<std::endl);
+
+            return false;
+
+        }else{
+
+            if (std::stoi(opcodes_[tokens.front()][1]) != tokens.size()){
+
+                (std::cout <<  colouredString("Sintaxe error detected in ", RED, BOLD)
+                <<  colouredString(" Line ", RED, BOLD) 
+                <<   colouredString(std::to_string(line), RED, BOLD)
+                << colouredString(" ", RED, BOLD)
+                << colouredString(tokens.front(), RED, BOLD)
+                <<  colouredString(" 2 args", RED, BOLD)  <<std::endl);
+
+                return false;
+        
+            }
+        }
+
+
+        return true;
+
+
+    }
+
+    bool Montador::find_element_vector_str(std::vector<std::string> vector_str, std::string str){
+
+        for (auto elem : vector_str){
+
+        //  std::cout << elem << std::endl;
+        //  std::cout << str << std::endl;
+
+
+            // if (elem == str){
+                
+            //     std::cout <<  colouredString(elem, RED, BOLD)  << colouredString(" aq is a invalid character : ", RED, BOLD) <<std::endl;
+            //     return true;
+            // }
+
+            if (str.find(elem) != std::string::npos){
+
+                std::cout <<  colouredString(elem, RED, BOLD) << colouredString(" is a invalid character ", RED, BOLD)<<std::endl;
+                return true;
+            }
+        }
+
+        return false;
 
     }
 

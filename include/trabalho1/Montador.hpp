@@ -30,10 +30,16 @@ namespace trabalho1{
             void label_found(std::string sim, int eddress_counter);
             bool check_sim_table(std::string sim);
             void add_sim_in_list(std::string sim, int eddress_counter);
-            void detect_error(std::vector<std::string> tokens, int line);
+            bool detect_error(std::vector<std::string> tokens, int line);
+            
+            bool scanner(std::vector<std::string> tokens, int line);
+            bool parser(std::vector<std::string> tokens, int line);
+            void semantic_analyzer();
+        
             void solve_pendency(std::string sim);
             void generete_obj_file();
             void set_file_name(std::string file_name);
+            bool find_element_vector_str(std::vector<std::string> vector_str, std::string str);
 
 
             void montar();
@@ -43,7 +49,7 @@ namespace trabalho1{
             std::string file_name_;
             std::vector<std::string> op_word_len, code_obj;
             Param opcodes_;
-            Param_d directive_;
+            Param directive_;
 
             const Param default_opcodes_ = {  
                 std::make_pair("ADD",    (op_word_len = {"1", "2"})),
@@ -61,11 +67,12 @@ namespace trabalho1{
                 std::make_pair("INPUT",  (op_word_len = {"12", "2"})),
                 std::make_pair("OUTPUT", (op_word_len = {"13", "2"})),
                 std::make_pair("STOP",   (op_word_len = {"14", "1"}))
+                
             };
 
-            const Param_d default_directive_ = {  
-                std::make_pair("CONST", "store const in memory"),
-                std::make_pair("SPACE", "reserve memory space"),
+            const Param default_directive_ = {  
+                std::make_pair("CONST", (op_word_len = {"0", "2"})),
+                std::make_pair("SPACE", (op_word_len = {"0", "2"}))
             };
 
             void initialize();
@@ -84,8 +91,8 @@ namespace trabalho1{
             sim_table_uni_ sim_table_test_;
             sim_table_uni_ line_table_;
             std::vector<sim_table_uni_> SimTable_;
-            std::vector<std::string> invalchar_front_ = {"0", "1","2","3","4","5" "6", "7", "8", "9", "#", "," , ":", "/", "\\", "*", "-", "+"};
-            std::vector<std::string> invalchar_ = {"#", "," , ":", "/", "\\", "*", "-", "+"};
+            std::vector<std::string> invalchar_front_ = {"0", "1","2","3","4","5" "6", "7", "8", "9", "#", "," , ":", "/", "\\", "*", "-", "+", ":"};
+            std::vector<std::string> invalchar_ = {"#", "," , "/", "\\", "*", "-", "+"};
                   
     };
 
