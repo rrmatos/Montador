@@ -6,7 +6,6 @@
 #include <array>
 #include <unordered_map> 
 #include <cstring>
-#include<bits/stdc++.h>
 #include <trabalho1/Preprocess.hpp>
 
 
@@ -51,8 +50,7 @@ namespace trabalho1{
             Param opcodes_;
             Param directive_;
 
-            const Param default_opcodes_ = {  
-                std::make_pair("ADD",    (op_word_len = {"1", "2"})),
+            const Param default_opcodes_ = {
                 std::make_pair("ADD",    (op_word_len = {"1", "2"})),
                 std::make_pair("SUB",    (op_word_len = {"2", "2"})),
                 std::make_pair("MULT",   (op_word_len = {"3", "2"})),

@@ -36,7 +36,7 @@ namespace trabalho1{
                 if (!code_line.empty()){
 
                     while(code_line.back() == ' '){
-                        std::cout << code_line << std::endl;
+                        // std::cout << code_line << std::endl;
 
                         code_line.pop_back();
                     }
