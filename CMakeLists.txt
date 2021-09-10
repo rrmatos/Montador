@@ -27,5 +27,5 @@ install(FILES src/utils.h DESTINATION include)
 
 add_executable(montador src/main.cpp src/Montador.cpp src/Preprocess.cpp src/utils.cpp)
 
-add_executable(simulador src/simulador.cpp)
+add_executable(simulador src/simulador.cpp src/utils.cpp)
 

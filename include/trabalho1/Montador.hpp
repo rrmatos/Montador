@@ -25,7 +25,7 @@ namespace trabalho1{
             void show_table();
             void recive_code(Preprocess::conde_struct code_line);
             int get_simble_idx(std::string simble);
-            std::vector<std::string> get_tokens_in_line(std::string code_line);
+            std::vector<std::string> get_tokens_in_line(std::string code_line,  int line);
             void label_found(std::string sim, int eddress_counter);
             bool check_sim_table(std::string sim);
             void add_sim_in_list(std::string sim, int eddress_counter);
@@ -49,11 +49,14 @@ namespace trabalho1{
             std::vector<std::string> op_word_len, code_obj;
             Param opcodes_;
             Param directive_;
+            std::string imediate_ = "0";
+            std::string const_ = "0";
+            
 
             const Param default_opcodes_ = {
                 std::make_pair("ADD",    (op_word_len = {"1", "2"})),
                 std::make_pair("SUB",    (op_word_len = {"2", "2"})),
-                std::make_pair("MULT",   (op_word_len = {"3", "2"})),
+                std::make_pair("MUL",    (op_word_len = {"3", "2"})),
                 std::make_pair("DIV",    (op_word_len = {"4", "2"})),
                 std::make_pair("JMP",    (op_word_len = {"5", "2"})),
                 std::make_pair("JMPN",   (op_word_len = {"6", "2"})),
@@ -69,8 +72,8 @@ namespace trabalho1{
             };
 
             const Param default_directive_ = {  
-                std::make_pair("CONST", (op_word_len = {"0", "2"})),
-                std::make_pair("SPACE", (op_word_len = {"0", "2"}))
+                std::make_pair("CONST", (op_word_len = {"0", "1"})),
+                std::make_pair("SPACE", (op_word_len = {"0", "1"}))
             };
 
             void initialize();

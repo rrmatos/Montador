@@ -38,12 +38,16 @@ namespace trabalho1{
 
         for (int idx = 0; idx < vector_code_line_.code_line.size(); idx++){
 
-
+            const_ = "0";
             auto code_line = vector_code_line_.code_line[idx];
             int line_number = vector_code_line_.line[idx];
             std::string imediate;
 
-            line_tokens = get_tokens_in_line(code_line);
+            line_tokens = get_tokens_in_line(code_line, line_number);
+
+            // for (auto t : line_tokens){
+            //     std::cout<<t <<std::endl;
+            // }
 
             detect_error(line_tokens, line_number);
 
@@ -67,16 +71,8 @@ namespace trabalho1{
 
                     if(!(opcodes_.find(line_tokens.front()) == opcodes_.end())){
 
-                        if (((line_tokens.front() == "LOAD") or (line_tokens.front() == "STORE")) and (line_tokens.size() == 3)){
 
-                            imediate = line_tokens.back();
-                            line_tokens.pop_back();
-
-                        }else{
-
-                            imediate = "0";
-
-                        }
+                        imediate = imediate_;
 
                         code_obj.push_back(opcodes_[line_tokens.front()][0]);
     
@@ -86,9 +82,13 @@ namespace trabalho1{
 
                             if(!check_sim_table(token)){
                                 
+                                if (token == line_tokens.back()){
+                                    code_obj.push_back(imediate);
+                                }else{
+                                    code_obj.push_back("0"); 
+                                }
                                 add_sim_in_list(token, eddress_counter);
                                 eddress_counter++;
-                                code_obj.push_back(imediate);
 
                             }else{
                                 
@@ -103,24 +103,17 @@ namespace trabalho1{
 
                             case('C'):  
 
-                                code_obj.push_back(line_tokens.back());
+                                code_obj.push_back(const_);
                                 break;
 
                             case('S'):
 
-                                if (line_tokens.size() > 1){
-
-                                    for (int i = 0; i < std::stoi(line_tokens.back()) - 1; i++){
-                                        // std::cout << i <<" "<< line_tokens.size() << " "<<std::stoi(line_tokens.back())<<std::endl;
+                                    for (int i = 0; i < std::stoi(const_) - 1; i++){
                                         code_obj.push_back("0");
                                         eddress_counter++;
 
                                     }
-                                    // code_obj.push_back("0");
 
-                                    break;
-                                }
-                                
                                 code_obj.push_back("0");
                                 break;
 
@@ -138,27 +131,24 @@ namespace trabalho1{
 
             }else if(!(opcodes_.find(line_tokens.front()) == opcodes_.end())){
 
-                if (((line_tokens.front() == "LOAD") or (line_tokens.front() == "STORE")) and (line_tokens.size() == 3)){
-                   
-                    imediate = line_tokens.back();
-                    line_tokens.pop_back();
-
-                }else{
-
-                    imediate = "0";
-
-                }
+                imediate = imediate_;
                 
                 code_obj.push_back(opcodes_[line_tokens.front()][0]);
                 eddress_counter++;
 
                 line_tokens.erase(line_tokens.begin()); // erase opcode
 
+
                 for (auto token : line_tokens){
+               
  
                     if(!check_sim_table(token)){
 
-                        code_obj.push_back(imediate);
+                        if (token == line_tokens.back()){
+                            code_obj.push_back(imediate);
+                        }else{
+                            code_obj.push_back("0"); 
+                        }
                         add_sim_in_list(token, eddress_counter);
                         eddress_counter++;
 
@@ -202,10 +192,16 @@ namespace trabalho1{
 
     bool Montador::detect_error(std::vector<std::string> tokens, int line){
 
-        
-        scanner(tokens, line);
+    
+        if (!tokens.empty()){
+            scanner(tokens, line);
 
-        parser(tokens, line);
+        }
+        if(tokens.size()>1){
+            parser(tokens, line);
+
+        }
+        
 
         return true;
 
@@ -213,31 +209,36 @@ namespace trabalho1{
 
     bool Montador::scanner(std::vector<std::string> tokens, int line){
 
-        std::string str( 1, tokens.front().front());
+        
+        for (auto token : tokens){
 
-        //  std::cout << tokens.front() << std::endl;
+            std::string str( 1, token.front());
 
-        if (find_element_vector_str(invalchar_front_, str)){
 
-            (std::cout <<  colouredString("Lexical error detected in : ", RED, BOLD)
-                << colouredString(tokens.front(), RED, BOLD)
-                <<  colouredString(" Line ", RED, BOLD) 
-                <<   colouredString(std::to_string(line), RED, BOLD) <<std::endl);
+            if (find_element_vector_str(invalchar_front_, str)){
 
-            return false;
-            
+                (std::cout <<  colouredString("Lexical error detected in : ", RED, BOLD)
+                    << colouredString(token, RED, BOLD)
+                    <<  colouredString(" Line ", RED, BOLD) 
+                    <<   colouredString(std::to_string(line), RED, BOLD) <<std::endl);
+
+                return false;
+                
+            }
+
+            if (find_element_vector_str(invalchar_, token)){
+
+                (std::cout <<  colouredString("Lexical error detected in : ", RED, BOLD)
+                    << colouredString(token, RED, BOLD)
+                    <<  colouredString(" Line ", RED, BOLD) 
+                    <<   colouredString(std::to_string(line), RED, BOLD) <<std::endl);
+
+                return false;
+
+            }
+
         }
-
-        if (find_element_vector_str(invalchar_, tokens.front())){
-
-            (std::cout <<  colouredString("Lexical error detected in : ", RED, BOLD)
-                << colouredString(tokens.front(), RED, BOLD)
-                <<  colouredString(" Line ", RED, BOLD) 
-                <<   colouredString(std::to_string(line), RED, BOLD) <<std::endl);
-
-            return false;
-
-        }
+        
 
         return true;
 
@@ -250,8 +251,6 @@ namespace trabalho1{
             tokens.erase(tokens.begin());
 
         }
-
-        //  std::cout << tokens.front() << std::endl;
 
         if((opcodes_.find(tokens.front()) == opcodes_.end())){
 
@@ -284,8 +283,6 @@ namespace trabalho1{
                         }
 
                     case('S'):
-
-                        // std::cout <<directive_[tokens.front()][1]<< tokens.size() << std::endl;
     
                         if (std::stoi(directive_[tokens.front()][1]) < tokens.size()){
 
@@ -315,7 +312,7 @@ namespace trabalho1{
 
         }else{
 
-            if (std::stoi(opcodes_[tokens.front()][1]) != tokens.size()){
+            if (!(std::stoi(opcodes_[tokens.front()][1]) <= tokens.size())){
 
                 (std::cout <<  colouredString("Sintaxe error detected in ", RED, BOLD)
                 <<  colouredString(" Line ", RED, BOLD) 
@@ -338,16 +335,6 @@ namespace trabalho1{
     bool Montador::find_element_vector_str(std::vector<std::string> vector_str, std::string str){
 
         for (auto elem : vector_str){
-
-        //  std::cout << elem << std::endl;
-        //  std::cout << str << std::endl;
-
-
-            // if (elem == str){
-                
-            //     std::cout <<  colouredString(elem, RED, BOLD)  << colouredString(" aq is a invalid character : ", RED, BOLD) <<std::endl;
-            //     return true;
-            // }
 
             if (str.find(elem) != std::string::npos){
 
@@ -372,35 +359,119 @@ namespace trabalho1{
         return -1;
     }
 
-    std::vector<std::string> Montador::get_tokens_in_line(std::string code_line){
+    std::vector<std::string> Montador::get_tokens_in_line(std::string code_line, int line){
 
         std::vector<std::string> tokens;
         std::string mais = "+", space = " ", comma = ",", token;
-        size_t pos = 0;
-        size_t pos1 = 0;
 
-        while (((pos = code_line.find(space)) != std::string::npos) or (pos = code_line.find(comma)) != std::string::npos or (pos = code_line.find(mais)) != std::string::npos) {
+        size_t pos;
+        
 
-            token = code_line.substr(0, pos);
+        if((pos = code_line.find(space)) != std::string::npos){
+
+            if ((code_line.at(pos-1) == ' ') or (code_line.at(pos+1) == ' ')){
+
+                (std::cout <<  colouredString("Sitaxe error detected in : ", RED, BOLD)
+                << colouredString(code_line, RED, BOLD)
+                << colouredString(" Line ", RED, BOLD) 
+                << colouredString(std::to_string(line), RED, BOLD) <<std::endl
+                << colouredString("More then one space", RED, BOLD) <<std::endl);
+           
             
-            if ((token.compare(space)!= std::string::npos)  and (token.compare(comma)!= std::string::npos)){
-
-                if ((pos1 = token.find(comma)) != std::string::npos){
-                    token.erase(pos1);
-                }
-
-                if ((pos1 = token.find(space)) != std::string::npos){
-                    token.erase(pos1);
-                }
-                if (!token.empty()){
+            }else{
+                
+                token = code_line.substr(0, pos);
+                code_line.erase(0, pos + space.length());
                 tokens.push_back(token);
-
-                }
+                
             }
-            code_line.erase(0, pos + space.length());
+
         }
 
-        tokens.push_back(code_line);
+
+        if ((pos = code_line.find(comma)) != std::string::npos){
+
+            if ((code_line.at(pos-1) == ' ') or (code_line.at(pos+1) == ' ')){
+            
+                (std::cout <<  colouredString("Sitaxe error detected in : ", RED, BOLD)
+                << colouredString(code_line, RED, BOLD)
+                << colouredString(" Line ", RED, BOLD) 
+                << colouredString(std::to_string(line), RED, BOLD) <<std::endl
+                << colouredString("More then one space", RED, BOLD) <<std::endl);
+
+            }else{
+
+                token = code_line.substr(0, pos);
+                code_line.erase(0, pos + comma.length());
+                tokens.push_back(token);
+            }
+
+        }
+
+        
+
+        if((pos = code_line.find(space)) != std::string::npos){
+
+            if ((code_line.at(pos-1) == ' ') or (code_line.at(pos+1) == ' ')){
+
+                (std::cout <<  colouredString("Sitaxe error detected in : ", RED, BOLD)
+                << colouredString(code_line, RED, BOLD)
+                << colouredString(" Line ", RED, BOLD) 
+                << colouredString(std::to_string(line), RED, BOLD) <<std::endl
+                << colouredString("More then one space", RED, BOLD) <<std::endl);
+           
+            
+            }else{
+
+                token = code_line.substr(0, pos);
+                code_line.erase(0, pos + space.length());
+                tokens.push_back(token);
+
+                if (tokens.back() == "SPACE" or tokens.back() == "CONST"){
+
+                    token = code_line.substr(0, pos);
+                    code_line.erase(0, pos + space.length());
+
+                    const_ = token;
+
+                }else{
+                    const_ = "0";
+                }
+
+            }
+
+        }
+
+        if ((pos = code_line.find(mais)) != std::string::npos){
+
+            if ((code_line.at(pos-1) == ' ') or (code_line.at(pos+1) == ' ')){
+            
+                (std::cout <<  colouredString("Sitaxe error detected in : ", RED, BOLD)
+                << colouredString(code_line, RED, BOLD)
+                << colouredString(" Line ", RED, BOLD) 
+                << colouredString(std::to_string(line), RED, BOLD) <<std::endl
+                << colouredString("More then one space", RED, BOLD) <<std::endl);
+
+            }else{
+
+                token = code_line.substr(0, pos);
+                code_line.erase(0, pos + mais.length());
+                tokens.push_back(token);
+                // imadiate_ = std::stoi(token);
+            }
+            imediate_ = code_line;
+
+            code_line.clear();
+
+
+        }else{
+            imediate_ = "0";
+
+        }
+
+        if (!code_line.empty()){
+            tokens.push_back(code_line);
+        }
 
         return tokens;        
     }
@@ -452,7 +523,6 @@ namespace trabalho1{
     }
 
     
-
     void  Montador:: solve_pendency(std::string sim){
 
         for (auto line_table : SimTable_){
@@ -460,7 +530,6 @@ namespace trabalho1{
             if (line_table.simble == sim){
 
                 for (auto idx : line_table.list){
-                    // std::cout << code_obj[idx] << std::endl;
                     code_obj[idx] = std::to_string(std::stoi(code_obj[idx]) + line_table.value);
                 }
 
