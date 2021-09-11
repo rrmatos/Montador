@@ -6,7 +6,6 @@
 #include <trabalho1/utils.h>
 
 
-
 std::vector<int> load_code_obj(std::string file_name){
 
   std::vector<int> vector_code;
@@ -34,12 +33,6 @@ std::vector<int> load_code_obj(std::string file_name){
 
 }
 
-void separador(){
-
-  std::cout << "<----------------------------------------------------------->"<< std::endl;
-
-}
-
 
 void show_data(std::vector<int> vector_code){
 
@@ -58,10 +51,7 @@ void log(std::vector<int> vector_code, int accumulator, int eddress_counter){
   std::cout << "<----------------------------------------------------------->"<< std::endl;
   std::cin >> x;
 
-
 }
-
-
 
 
 int main(int argc, char* argv[]){ 
@@ -74,15 +64,9 @@ int main(int argc, char* argv[]){
 
   vector_code = load_code_obj(argv[1]);
 
-
-  
   while(vector_code.at(eddress_counter) != 14){
 
-
     switch (vector_code.at(eddress_counter)){
-
-      //  std::cout << vector_code.at(eddress_counter)<< std::endl;
-
 
         case(1):
 
@@ -241,7 +225,6 @@ int main(int argc, char* argv[]){
           std::cout << colouredString("Opcode error", RED, BOLD)<<std::endl;
           break;
     }
-
 
   }
 
